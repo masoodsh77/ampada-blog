@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'NewYorkSmall';
+  src: url(./assets/fonts/NewYork/NewYorkSmall-Regular.ttf);
+}
+
 body , #root{
   margin: 0;
   padding: 0;
