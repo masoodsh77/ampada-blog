@@ -2,7 +2,14 @@
   font-family: 'NewYorkSmall';
   src: url(./assets/fonts/NewYork/NewYorkSmall-Regular.ttf);
 }
-
+@font-face {
+  font-family: 'newYorkExtraLarg';
+  src: url(./assets/fonts/NewYork/NewYorkExtraLarge-Regular.ttf);
+}
+@font-face {
+  font-family: 'SFMono';
+  src: url(./assets/fonts/SFMono/SFMonoRegular.woff);
+}
 body , #root{
   margin: 0;
   padding: 0;
