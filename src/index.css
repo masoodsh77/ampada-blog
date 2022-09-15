@@ -14,19 +14,24 @@
   font-family: 'SFProDisplay';
   src: url(./assets/fonts/SFProDisplay/SFPRODISPLAYREGULAR.OTF) format('truetype');
 }
+@font-face {
+  font-family: 'SFProTextRegular';
+  src: url(./assets/fonts/SFText/SF-Pro-Text-Light.otf) format('truetype');
+}
+@font-face {
+  font-family: 'SFProTextBold';
+  src: url(./assets/fonts/SFText/SF-Pro-Text-Heavy.otf) format('truetype');
+}
 body , #root{
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'NewYorkSmall' ,'newYorkExtraLarg' ,'SFMono' ,'SFProDisplay' ,'SFProText' ;
+  -webkit-font-smoothing: 'SFProText';
+  -moz-osx-font-smoothing: 'SFProText';
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'NewYorkSmall' ,'newYorkExtraLarg' ,'SFMono' ,'SFProDisplay' ,'SFProText';
 }

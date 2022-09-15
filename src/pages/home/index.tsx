@@ -1,11 +1,12 @@
-import { Box, Grid, styled } from "@mui/material";
+import { Box, Grid, styled, CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import NewsCard from "../../components/NewsCard";
 
 const RootStyle = styled(Box)(({ theme }) => ({
   maxWidth: "60rem",
-  marginTop:'5rem'
+  marginTop: "5rem",
+  marginBottom: "5rem",
 }));
 
 const SlidTitle = styled(Box)(({ theme }) => ({
@@ -16,6 +17,10 @@ const SlidTitle = styled(Box)(({ theme }) => ({
   lineHeight: "100%",
   textAlign: "center",
   padding: "40px 3rem",
+  "@media (max-width: 720px)": {
+    padding: "40px 1rem 5px 1rem",
+    fontSize: 36,
+  },
 }));
 
 const SlidSummery = styled(Box)(({ theme }) => ({
@@ -28,6 +33,11 @@ const SlidSummery = styled(Box)(({ theme }) => ({
   padding: "30px 1rem",
   margin: "0 8rem",
   borderBottom: "2px solid #000",
+  "@media (max-width: 720px)": {
+    margin: "0",
+    padding: "5px 1rem 30px 1rem",
+    fontSize: 16,
+  },
 }));
 
 const ArticlesSection = styled(Box)(({ theme }) => ({
@@ -47,6 +57,7 @@ const ArticleTitle = styled(Box)(({ theme }) => ({
 
 function Home() {
   const [data, setData] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const options = {
     method: "GET",
     url: "https://newscatcher.p.rapidapi.com/v1/latest_headlines",
@@ -61,27 +72,46 @@ function Home() {
     axios.request(options).then((res) => setData(res.data.articles));
   }, []);
 
+  useEffect(() => {
+    if (data.length === 0) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
+  }, [data]);
+
   return (
     <Box display={"flex"} justifyContent={"center"}>
-      <RootStyle>
-        <Box>
-          <img src={data[0]?.media} alt="news" width={"100%"} />
-          <SlidTitle>{data[0]?.title}</SlidTitle>
-          <SlidSummery>{data[0]?.summary.substring(0, 100)}...</SlidSummery>
+      {isLoading ? (
+        <Box
+          sx={{ height: "calc(100% - 6rem - 641 px)" , pt:5 , pb:5}}
+          display={"flex"}
+          alignItems={"canter"}
+          justifyContent={"center"}
+        >
+          <CircularProgress color={'success'}/>
         </Box>
-        <ArticlesSection>
-          <ArticleTitle>All articles</ArticleTitle>
-          <Grid container xs={12}>
-            {data?.slice(1, 13).map((item: any, index: number) => {
-              return (
-                <Grid key={index} item xs={12} md={6}>
-                  <NewsCard item={item} />
-                </Grid>
-              );
-            })}
-          </Grid>
-        </ArticlesSection>
-      </RootStyle>
+      ) : (
+        <RootStyle>
+          <Box>
+            <img src={data[0]?.media} alt="news" width={"100%"} />
+            <SlidTitle>{data[0]?.title}</SlidTitle>
+            <SlidSummery>{data[0]?.summary.substring(0, 100)}...</SlidSummery>
+          </Box>
+          <ArticlesSection>
+            <ArticleTitle>All articles</ArticleTitle>
+            <Grid container xs={12}>
+              {data?.slice(1, 13).map((item: any, index: number) => {
+                return (
+                  <Grid key={index} item xs={12} md={6}>
+                    <NewsCard item={item} />
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </ArticlesSection>
+        </RootStyle>
+      )}
     </Box>
   );
 }

@@ -6,11 +6,11 @@ import {
   InputAdornment,
   Button,
   IconButton,
+  Drawer,
 } from "@mui/material";
 import Logo from "../../assets/Svgs/Logo.svg";
 import { useNavigate } from "react-router-dom";
-import SearchIcon from "@mui/icons-material/Search";
-import CloseIcon from "@mui/icons-material/Close";
+import { Search, Close, Menu } from "@mui/icons-material";
 import { useState } from "react";
 import axios from "axios";
 
@@ -27,11 +27,18 @@ const RootStyle = styled(Box)(({ theme }) => ({
   justifyContent: "space-between",
   paddingLeft: 64,
   paddingRight: 64,
+  "@media (max-width: 720px)": {
+    paddingRight: 20,
+    paddingLeft: 20,
+  },
 }));
 
 const MenuContainer = styled(Stack)(({ theme }) => ({
   alignItems: "center",
   justifyContent: "space-around",
+  "@media (max-width: 720px)": {
+    display: "none",
+  },
 }));
 
 const MenuItems = styled(Box, {
@@ -46,6 +53,13 @@ const MenuItems = styled(Box, {
   display: "flex",
   alignItems: "center",
   cursor: "pointer",
+  "@media (max-width: 720px)": {
+    width: "15rem",
+    borderBottom: "none",
+    justifyContent: "center",
+    borderRight: active ? "5px solid #000" : "5px solid rgba(0, 0, 0, 0.1)",
+    marginBottom:'2rem',
+  },
 }));
 const SearchRes = styled(Box)(({ theme }) => ({
   position: "absolute",
@@ -59,12 +73,38 @@ const SearchRes = styled(Box)(({ theme }) => ({
   boxShadow: "0 0 5px gray",
   overflowY: "scroll",
 }));
+const LogoImage = styled("img")(({ theme }) => ({
+  "@media (max-width: 720px)": {
+    width: "15rem",
+  },
+}));
+
+const MobileMenuContainer = styled(Box)(({ theme }) => ({
+  display: "none",
+  "@media (max-width: 720px)": {
+    display: "block",
+  },
+}));
 
 function Navbar() {
   const [searchRes, setSearchRes] = useState<boolean>(false);
   const [searchData, setSearchData] = useState<string>("");
   const [res, setRes] = useState([]);
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  const toggleDrawer =
+    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
+      ) {
+        return;
+      }
+
+      setOpenMenu(open);
+    };
 
   const handleSearch = (e: any) => {
     setSearchData(e.target.value);
@@ -87,7 +127,12 @@ function Navbar() {
   };
   return (
     <RootStyle>
-      <img src={Logo} alt="logo" loading="lazy" onClick={() => navigate("/")} />
+      <LogoImage
+        src={Logo}
+        alt="logo"
+        loading="lazy"
+        onClick={() => navigate("/")}
+      />
       <MenuContainer spacing={3} direction={"row"}>
         <Box sx={{ position: "relative", fontFamily: "NewYorkSmall" }}>
           <TextField
@@ -95,7 +140,7 @@ function Navbar() {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchIcon />
+                  <Search />
                 </InputAdornment>
               ),
             }}
@@ -109,7 +154,7 @@ function Navbar() {
                 setSearchData("");
               }}
             >
-              <CloseIcon />
+              <Close />
             </IconButton>
             {res.map((item: any, index: number) => {
               return (
@@ -144,7 +189,7 @@ function Navbar() {
         >
           BLOG
         </MenuItems>
-        <MenuItems active={window.location.pathname === "/about" && true}>
+        <MenuItems active={window.location.pathname === "/about" && true} onClick={() => navigate("/about")}>
           ABOUT
         </MenuItems>
         <MenuItems active={window.location.pathname === "/links" && true}>
@@ -154,6 +199,28 @@ function Navbar() {
           PROJECTS
         </MenuItems>
       </MenuContainer>
+      <MobileMenuContainer>
+        <IconButton onClick={toggleDrawer(true)}>
+          <Menu />
+        </IconButton>
+      </MobileMenuContainer>
+      <Drawer anchor="right" open={openMenu} onClose={toggleDrawer(false)}>
+        <MenuItems
+          active={window.location.pathname === "/" && true}
+          onClick={() => navigate("/")}
+        >
+          BLOG
+        </MenuItems>
+        <MenuItems active={window.location.pathname === "/about" && true} onClick={() => navigate("/about")}>
+          ABOUT
+        </MenuItems>
+        <MenuItems active={window.location.pathname === "/links" && true}>
+          LINKS
+        </MenuItems>
+        <MenuItems active={window.location.pathname === "/projects" && true}>
+          PROJECTS
+        </MenuItems>
+      </Drawer>
     </RootStyle>
   );
 }
