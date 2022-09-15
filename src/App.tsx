@@ -4,6 +4,7 @@ import { Box } from "@mui/material";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import About from "./pages/About";
+import Post from "./pages/Post";
 
 function App() {
   return (
@@ -13,9 +14,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/links" element={<Home />} />
-          <Route path="/project" element={<Home />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/links" element={<About />} />
+          <Route path="/project" element={<About />} />
+          <Route path="/post/:id" element={<Post />} />
         </Routes>
         <Footer />
       </BrowserRouter>

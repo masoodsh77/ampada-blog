@@ -2,6 +2,7 @@ import { Box, Grid, styled, CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import NewsCard from "../../components/NewsCard";
+import { Link } from "react-router-dom";
 
 const RootStyle = styled(Box)(({ theme }) => ({
   maxWidth: "60rem",
@@ -57,7 +58,7 @@ const ArticleTitle = styled(Box)(({ theme }) => ({
 
 function Home() {
   const [data, setData] = useState<any>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const options = {
     method: "GET",
     url: "https://newscatcher.p.rapidapi.com/v1/latest_headlines",
@@ -84,12 +85,12 @@ function Home() {
     <Box display={"flex"} justifyContent={"center"}>
       {isLoading ? (
         <Box
-          sx={{ height: "calc(100% - 6rem - 641 px)" , pt:5 , pb:5}}
+          sx={{ height: "calc(100% - 6rem - 641 px)", pt: 5, pb: 5 }}
           display={"flex"}
           alignItems={"canter"}
           justifyContent={"center"}
         >
-          <CircularProgress color={'success'}/>
+          <CircularProgress color={"success"} />
         </Box>
       ) : (
         <RootStyle>
@@ -104,7 +105,9 @@ function Home() {
               {data?.slice(1, 13).map((item: any, index: number) => {
                 return (
                   <Grid key={index} item xs={12} md={6}>
-                    <NewsCard item={item} />
+                    <Link to={`/post/${item._id}`} state={{ data: item }}>
+                      <NewsCard item={item} />
+                    </Link>
                   </Grid>
                 );
               })}

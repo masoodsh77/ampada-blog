@@ -58,7 +58,7 @@ const MenuItems = styled(Box, {
     borderBottom: "none",
     justifyContent: "center",
     borderRight: active ? "5px solid #000" : "5px solid rgba(0, 0, 0, 0.1)",
-    marginBottom:'2rem',
+    marginBottom: "2rem",
   },
 }));
 const SearchRes = styled(Box)(({ theme }) => ({
@@ -189,13 +189,22 @@ function Navbar() {
         >
           BLOG
         </MenuItems>
-        <MenuItems active={window.location.pathname === "/about" && true} onClick={() => navigate("/about")}>
+        <MenuItems
+          active={window.location.pathname === "/about" && true}
+          onClick={() => navigate("/about")}
+        >
           ABOUT
         </MenuItems>
-        <MenuItems active={window.location.pathname === "/links" && true}>
+        <MenuItems
+          active={window.location.pathname === "/links" && true}
+          onClick={() => navigate("/links")}
+        >
           LINKS
         </MenuItems>
-        <MenuItems active={window.location.pathname === "/projects" && true}>
+        <MenuItems
+          active={window.location.pathname === "/projects" && true}
+          onClick={() => navigate("/projects")}
+        >
           PROJECTS
         </MenuItems>
       </MenuContainer>
@@ -211,13 +220,22 @@ function Navbar() {
         >
           BLOG
         </MenuItems>
-        <MenuItems active={window.location.pathname === "/about" && true} onClick={() => navigate("/about")}>
+        <MenuItems
+          active={window.location.pathname === "/about" && true}
+          onClick={() => navigate("/about")}
+        >
           ABOUT
         </MenuItems>
-        <MenuItems active={window.location.pathname === "/links" && true}>
+        <MenuItems
+          active={window.location.pathname === "/links" && true}
+          onClick={() => navigate("/links")}
+        >
           LINKS
         </MenuItems>
-        <MenuItems active={window.location.pathname === "/projects" && true}>
+        <MenuItems
+          active={window.location.pathname === "/projects" && true}
+          onClick={() => navigate("/projects")}
+        >
           PROJECTS
         </MenuItems>
       </Drawer>

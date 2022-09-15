@@ -7,6 +7,10 @@
   src: url(./assets/fonts/NewYork/NewYorkExtraLarge-Regular.ttf);
 }
 @font-face {
+  font-family: 'newYorkMedium';
+  src: url(./assets/fonts/NewYork/NewYorkMedium-Regular.ttf);
+}
+@font-face {
   font-family: 'SFMono';
   src: url(./assets/fonts/SFMono/SFMonoRegular.woff);
 }
