@@ -9,7 +9,7 @@ import {
   Drawer,
 } from "@mui/material";
 import Logo from "../../assets/Svgs/Logo.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Search, Close, Menu } from "@mui/icons-material";
 import { useState } from "react";
 import axios from "axios";
@@ -152,25 +152,33 @@ function Navbar() {
               onClick={() => {
                 setSearchRes(false);
                 setSearchData("");
+                setRes([]);
               }}
             >
               <Close />
             </IconButton>
             {res.map((item: any, index: number) => {
               return (
-                <Box
-                  sx={{
-                    p: 1,
-                    borderBottom: "1px solid grey",
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    "&:hover": { bgcolor: "lightgrey" },
-                  }}
+                <Link
+                  to={`/post/${item._id}`}
+                  state={{ data: item }}
+                  style={{ color: "#000", textDecoration: "none" }}
+                  onClick={() => setSearchRes(false)}
                 >
-                  <img src={item.media} width={50} height={50} alt="new" />
-                  <Box sx={{ ml: 2 }}>{item.title}</Box>
-                </Box>
+                  <Box
+                    sx={{
+                      p: 1,
+                      borderBottom: "1px solid grey",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      "&:hover": { bgcolor: "lightgrey" },
+                    }}
+                  >
+                    <img src={item.media} width={50} height={50} alt="new" />
+                    <Box sx={{ ml: 2 }}>{item.title}</Box>
+                  </Box>
+                </Link>
               );
             })}
           </SearchRes>

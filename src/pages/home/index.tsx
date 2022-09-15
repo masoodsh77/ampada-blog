@@ -94,18 +94,28 @@ function Home() {
         </Box>
       ) : (
         <RootStyle>
-          <Box>
-            <img src={data[0]?.media} alt="news" width={"100%"} />
-            <SlidTitle>{data[0]?.title}</SlidTitle>
-            <SlidSummery>{data[0]?.summary.substring(0, 100)}...</SlidSummery>
-          </Box>
+          <Link
+            to={`/post/${data[0]?._id}`}
+            state={{ data: data[0] }}
+            style={{ color: "#000", textDecoration: "none" }}
+          >
+            <Box>
+              <img src={data[0]?.media} alt="news" width={"100%"} />
+              <SlidTitle>{data[0]?.title}</SlidTitle>
+              <SlidSummery>{data[0]?.summary.substring(0, 100)}...</SlidSummery>
+            </Box>
+          </Link>
           <ArticlesSection>
             <ArticleTitle>All articles</ArticleTitle>
             <Grid container xs={12}>
               {data?.slice(1, 13).map((item: any, index: number) => {
                 return (
                   <Grid key={index} item xs={12} md={6}>
-                    <Link to={`/post/${item._id}`} state={{ data: item }}>
+                    <Link
+                      to={`/post/${item._id}`}
+                      state={{ data: item }}
+                      style={{ color: "#000", textDecoration: "none" }}
+                    >
                       <NewsCard item={item} />
                     </Link>
                   </Grid>

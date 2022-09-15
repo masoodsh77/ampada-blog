@@ -3,6 +3,8 @@ import { Box, Stack, styled, Avatar, Divider } from "@mui/material";
 import { useState, useEffect } from "react";
 import ShareBtn from "../../components/ShareBtn";
 import Eyes from "../../assets/Svgs/Eyes.svg";
+import WhatNext from "../../components/WhatsNext";
+import Newsletter from "../../components/Newsletter";
 
 const RootStyle = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -12,6 +14,15 @@ const RootStyle = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   flexWrap: "wrap",
+}));
+
+const Container = styled(Box)(({ theme }) => ({
+  width: "100%",
+  display: "flex",
+  justifyContent: "center",
+  "@media (max-width: 720px)": {
+    margin: "2rem 1rem",
+  },
 }));
 
 const PostTitle = styled(Box)(({ theme }) => ({
@@ -55,6 +66,10 @@ const AuthorBox = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   fontFamily: "SFProTextRegular",
+  "@media (max-width: 720px)": {
+    margin: "2rem 1rem",
+    flexWrap: "wrap",
+  },
 }));
 
 const AuthorName = styled("span")(({ theme }) => ({
@@ -80,6 +95,10 @@ const PostContent = styled(Box)(({ theme }) => ({
   fontSize: 20,
   fontWeight: 400,
   lineHeight: "34px",
+  "@media (max-width: 720px)": {
+    margin: "0 1rem",
+  },
+
 }));
 
 const TagSection = styled(Box)(({ theme }) => ({
@@ -91,6 +110,9 @@ const TagSection = styled(Box)(({ theme }) => ({
   maxWidth: "40rem",
   width: "40rem",
   margin: "2rem 0",
+  "@media (max-width: 720px)": {
+    margin: "2rem 1rem",
+  },
 }));
 
 const AuthorBio = styled(Stack)(({ theme }) => ({
@@ -99,24 +121,42 @@ const AuthorBio = styled(Stack)(({ theme }) => ({
   borderTop: "1px dashed #000",
   fontFamily: "newYorkMedium",
   padding: "3rem 0",
+  "@media (max-width: 720px)": {
+    margin: "0 1rem",
+  },
+}));
+
+const TagItem = styled("span")(({ theme }) => ({
+  textDecoration: "underline",
 }));
 
 function Post() {
   const [postData, setPostData] = useState<any>([]);
   const location: any = useLocation();
-  console.log(location.state.data, " useLocation Hook");
   useEffect(() => {
     setPostData(location?.state?.data);
   }, [location]);
   return (
     <Box display={"flex"} justifyContent={"center"}>
       <RootStyle>
-        <PostTitle>{postData?.title}</PostTitle>
-        <PostSummery>{postData?.summary?.substring(0, 100)}</PostSummery>
+        <Container>
+          <PostTitle>{postData?.title}</PostTitle>
+        </Container>
+        <Container>
+          <PostSummery>{postData?.summary?.substring(0, 100)}</PostSummery>
+        </Container>
         <img src={postData?.media} alt="news" width={"100%"} />
         <AuthorBox>
-          <Stack direction={"row"} spacing={2}>
-            <Avatar alt={postData?.author}>
+          <Stack
+            direction={"row"}
+            spacing={2}
+            alignItems={"center"}
+            sx={{ mb: 2 }}
+          >
+            <Avatar
+              alt={postData?.author}
+              sx={{ "@media (max-width: 720px)": { width: 56, height: 56 } }}
+            >
               {postData?.author?.substring(0, 1)}
             </Avatar>
             <Box sx={{ textAlign: "left" }}>
@@ -126,20 +166,23 @@ function Post() {
               </PublishedDate>
             </Box>
           </Stack>
-          <ShareBtn size="small" />
+          <Box>
+            <ShareBtn size="small" />
+          </Box>
         </AuthorBox>
         <Box
           sx={{ width: "100%", mt: 3 }}
           display={"flex"}
           justifyContent={"center"}
-          flexWrap={"wrap"}
         >
           <PostContent>{postData?.summary}</PostContent>
         </Box>
-        <ShareBtn size="large" />
-        <Box sx={{ width: "100%" }} display={"flex"} justifyContent={"center"}>
-          <TagSection>Tags: {postData?.topic}</TagSection>
-        </Box>
+        <ShareBtn size="large" title />
+        <Container>
+          <TagSection>
+            Tags: <TagItem>{postData?.topic}</TagItem>
+          </TagSection>
+        </Container>
         <AuthorBio direction={"row"} spacing={2}>
           <Avatar sx={{ width: 56, height: 56 }} alt={postData?.author}>
             {postData?.author?.substring(0, 1)}
@@ -156,6 +199,12 @@ function Post() {
             <img src={Eyes} alt="eyes" />
           </Divider>
         </Box>
+        <Container>
+          <WhatNext />
+        </Container>
+        <Container>
+          <Newsletter />
+        </Container>
       </RootStyle>
     </Box>
   );
