@@ -98,7 +98,6 @@ const PostContent = styled(Box)(({ theme }) => ({
   "@media (max-width: 720px)": {
     margin: "0 1rem",
   },
-
 }));
 
 const TagSection = styled(Box)(({ theme }) => ({
@@ -134,6 +133,7 @@ function Post() {
   const [postData, setPostData] = useState<any>([]);
   const location: any = useLocation();
   useEffect(() => {
+    window.scrollTo(0, 0);
     setPostData(location?.state?.data);
   }, [location]);
   return (

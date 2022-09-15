@@ -1,5 +1,6 @@
 import { styled, Box } from "@mui/material";
 import Logo from "../../assets/Svgs/LogoWhite.svg";
+import { Link } from "react-router-dom";
 
 interface IKeyWord {
   title: string;
@@ -100,9 +101,30 @@ function Footer() {
       </Box>
       <Box display={"flex"} justifyContent={"center"}>
         <SocialMediaSection>
-          <SocialMediaItem>Twitter</SocialMediaItem>
-          <SocialMediaItem>Linkedin</SocialMediaItem>
-          <SocialMediaItem>RSS</SocialMediaItem>
+          <a
+            href="https://www.linkedin.com/in/masood-shaterabadi/"
+            target="_blank"
+            rel="noreferrer"
+            style={{ color: "#FFF" }}
+          >
+            <SocialMediaItem>Twitter</SocialMediaItem>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/masood-shaterabadi/"
+            target="_blank"
+            rel="noreferrer"
+            style={{ color: "#FFF" }}
+          >
+            <SocialMediaItem>Linkedin</SocialMediaItem>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/masood-shaterabadi/"
+            target="_blank"
+            rel="noreferrer"
+            style={{ color: "#FFF" }}
+          >
+            <SocialMediaItem>RSS</SocialMediaItem>
+          </a>
         </SocialMediaSection>
       </Box>
       <Box

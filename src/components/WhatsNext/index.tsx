@@ -2,6 +2,7 @@ import { Box, styled, Grid } from "@mui/material";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import NewsCard from "../NewsCard";
+import { Link } from "react-router-dom";
 
 const Title = styled(Box)(() => ({
   fontFamily: "newYorkExtraLarg",
@@ -34,7 +35,13 @@ function WhatNext() {
         {data?.slice(13, 19).map((item: any, index: number) => {
           return (
             <Grid key={index} xs={12} md={4}>
-              <NewsCard item={item} />
+              <Link
+                to={`/post/${item._id}`}
+                state={{ data: item }}
+                style={{ color: "#000", textDecoration: "none" }}
+              >
+                <NewsCard item={item} />
+              </Link>
             </Grid>
           );
         })}
