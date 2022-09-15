@@ -10,6 +10,10 @@
   font-family: 'SFMono';
   src: url(./assets/fonts/SFMono/SFMonoRegular.woff);
 }
+@font-face {
+  font-family: 'SFProDisplay';
+  src: url(./assets/fonts/SFProDisplay/SFPRODISPLAYREGULAR.OTF) format('truetype');
+}
 body , #root{
   margin: 0;
   padding: 0;
