@@ -2,10 +2,9 @@
   "name": "apada-blog",
   "version": "0.1.0",
   "private": true,
-  "web-vitals": "^2.1.0",
-  "homepage": "https://masoodsh77.github.io/ampada-blog",
-  "proxy": "https://newscatcher.p.rapidapi.com",
+  "proxy":"https://newscatcher.p.rapidapi.com",
   "dependencies": {
+    "web-vitals": "^2.1.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.10.3",
@@ -18,7 +17,6 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "axios": "^0.27.2",
-    "gh-pages": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
@@ -26,8 +24,6 @@
     "typescript": "^4.4.2"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -52,3 +48,4 @@
     ]
   }
 }
+
